@@ -21,13 +21,23 @@ const clientesModel = sequelize.define ('clientes', {
 //autentificamos
 sequelize.authenticate()
 .then(() => {
-  console.log("¡Conectados a la base de daaatoooss!")
+  console.log("Conexión a la base de datos Ok")
 })
 
 .catch(error => {
-  console.log("No nos pudimos conectar"+error)
+  console.log("Error al conectarse a la base de datos"+error)
+})
+
+//mostrar registros
+clientesModel.findAll({attributes:['id', 'nomcli','apecli', 'nrodnicli', 'telcli']})
+.then(clientes => {
+  const resultados=JSON.stringify(clientes)
+  console.log(resultados)
+})
+.catch(error => {
+  console.log("No hay registros"+error)
 })
 
 app.listen(3000, () => {
-  console.log('¡¡Está vivo!!')
+  console.log('¡Conectados!')
 })
